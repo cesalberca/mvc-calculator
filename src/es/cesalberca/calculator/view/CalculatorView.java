@@ -13,9 +13,13 @@ public class CalculatorView extends JFrame {
 
     public CalculatorView() {
         this.setSize(400, 400);
-        this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setDefaultLookAndFeelDecorated(false);
+
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        }
 
         this.setTitle("MVC Implementation");
 
@@ -60,7 +64,9 @@ public class CalculatorView extends JFrame {
 
         jtfPreviousOperation = new JTextField(10);
         jtfPreviousOperation.setFont(font);
+        jtfPreviousOperation.setHorizontalAlignment(JTextField.RIGHT);
         jtfResult = new JTextField(10);
+        jtfResult.setHorizontalAlignment(JTextField.RIGHT);
         jtfResult.setFont(font);
 
         // Results
@@ -68,7 +74,7 @@ public class CalculatorView extends JFrame {
         jpResults.setLayout(new BorderLayout());
 
         jpResults.add(jtfPreviousOperation, BorderLayout.NORTH);
-        jpResults.add(jtfResult, BorderLayout.SOUTH);
+        jpResults.add(jtfResult, BorderLayout.CENTER);
 
         gridConstraints.gridx = 1;
         gridConstraints.gridy = 0;
@@ -121,14 +127,18 @@ public class CalculatorView extends JFrame {
         jpMain.add(jbDivide, gridConstraints);
 
         this.add(jpMain);
+        this.setVisible(true);
     }
 
     public void setNumber (double number) {
         jtfResult.setText(Double.toString(number));
     }
 
+    public void setPreviousNumber(double previousNumber) {
+        jtfPreviousOperation.setText(Double.toString(previousNumber));
+    }
+
     public void addCalculationListener (ActionListener listenForCalc) {
-        jbEqual.addActionListener(listenForCalc);
         jb0.addActionListener(listenForCalc);
         jb1.addActionListener(listenForCalc);
         jb2.addActionListener(listenForCalc);
@@ -142,6 +152,7 @@ public class CalculatorView extends JFrame {
     }
 
     public void addOperationListener (ActionListener listenForOperation) {
+        jbEqual.addActionListener(listenForOperation);
         jbAdd.addActionListener(listenForOperation);
         jbSubstract.addActionListener(listenForOperation);
         jbMultiply.addActionListener(listenForOperation);

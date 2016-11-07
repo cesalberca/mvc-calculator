@@ -12,11 +12,13 @@ public class CalculatorModel implements Subject {
     private ArrayList<Observer> observers;
 
     private double number;
+    private double previousNumber;
     private double calculationValue;
 
     public CalculatorModel () {
         observers = new ArrayList<>();
         number = 0;
+        previousNumber = 0;
     }
 
     public void addDigit (float digit) {
@@ -38,6 +40,14 @@ public class CalculatorModel implements Subject {
     public void setNumber (double number) {
         this.number = number;
         notifyObservers();
+    }
+
+    public double getPreviousNumber() {
+        return previousNumber;
+    }
+
+    public void setPreviousNumber(double previousNumber) {
+        this.previousNumber = previousNumber;
     }
 
     @Override

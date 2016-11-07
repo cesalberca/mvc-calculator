@@ -27,7 +27,7 @@ public class CalculatorController implements Observer {
     private class CalculateListener implements ActionListener {
         public void actionPerformed (ActionEvent e) {
             int numberUserPressed = Integer.parseInt(((JButton)e.getSource()).getText());
-            model.addToNumbers(numberUserPressed);
+            model.addDigit(numberUserPressed);
         }
     }
 
@@ -35,6 +35,9 @@ public class CalculatorController implements Observer {
         @Override
         public void actionPerformed(ActionEvent e) {
             String operationPressed = ((JButton)e.getSource()).getText();
+
+            model.setPreviousNumber(model.getNumber());
+            model.setNumber(0);
 
             switch (operationPressed) {
                 case "+":
@@ -54,5 +57,6 @@ public class CalculatorController implements Observer {
     @Override
     public void update() {
         view.setNumber(model.getNumber());
+        view.setPreviousNumber(model.getPreviousNumber());
     }
 }
