@@ -19,6 +19,7 @@ public class CalculatorModel implements Subject {
         observers = new ArrayList<>();
         number = 0;
         previousNumber = 0;
+        currentTypeOfOperation = "";
     }
 
     public void addDigit (float digit) {
@@ -26,19 +27,22 @@ public class CalculatorModel implements Subject {
     }
 
     public Double makeOperation () {
+        Double result = 0.0;
         switch (this.currentTypeOfOperation) {
             case "+":
+                result = this.getPreviousNumber() + this.getNumber();
                 break;
             case "-":
+                result = this.getPreviousNumber() - this.getNumber();
                 break;
             case "x":
+                result = this.getPreviousNumber() * this.getNumber();
                 break;
             case "/":
-                break;
-            case "=":
+                result = this.getPreviousNumber() / this.getNumber();
                 break;
         }
-        }
+        return result;
     }
 
     public double getNumber () {
@@ -48,6 +52,14 @@ public class CalculatorModel implements Subject {
     public void setNumber (double number) {
         this.number = number;
         notifyObservers();
+    }
+
+    public String getCurrentTypeOfOperation() {
+        return currentTypeOfOperation;
+    }
+
+    public void setCurrentTypeOfOperation(String currentTypeOfOperation) {
+        this.currentTypeOfOperation = currentTypeOfOperation;
     }
 
     public double getPreviousNumber() {
