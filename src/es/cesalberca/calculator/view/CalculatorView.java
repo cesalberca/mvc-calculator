@@ -134,8 +134,8 @@ public class CalculatorView extends JFrame {
         jtfResult.setText(Double.toString(number));
     }
 
-    public void setPreviousNumber(double previousNumber) {
-        jtfPreviousOperation.setText(Double.toString(previousNumber));
+    public void setPreviousNumber(double previousNumber, String operation) {
+        jtfPreviousOperation.setText(Double.toString(previousNumber) + " " + operation);
     }
 
     public void addCalculationListener (ActionListener listenForCalc) {
