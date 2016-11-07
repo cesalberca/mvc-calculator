@@ -36,20 +36,12 @@ public class CalculatorController implements Observer {
         public void actionPerformed(ActionEvent e) {
             String operationPressed = ((JButton)e.getSource()).getText();
 
-            model.setPreviousNumber(model.getNumber());
-            model.setNumber(0);
-
-            switch (operationPressed) {
-                case "+":
-                    break;
-                case "-":
-                    break;
-                case "x":
-                    break;
-                case "/":
-                    break;
-                case "=":
-                    break;
+            if (operationPressed == "=") {
+                model.setNumber(model.makeOperation());
+            } else {
+                model.setCurrentTypeOfOperation(operationPressed);
+                model.setPreviousNumber(model.getNumber());
+                model.setNumber(0);
             }
         }
     }
@@ -57,6 +49,6 @@ public class CalculatorController implements Observer {
     @Override
     public void update() {
         view.setNumber(model.getNumber());
-        view.setPreviousNumber(model.getPreviousNumber());
+        view.setPreviousNumber(model.getPreviousNumber(), model.getCurrentTypeOfOperation());
     }
 }
