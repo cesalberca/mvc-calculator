@@ -13,7 +13,7 @@ public class CalculatorModel implements Subject {
 
     private double number;
     private double previousNumber;
-    private double calculationValue;
+    private String currentTypeOfOperation;
 
     public CalculatorModel () {
         observers = new ArrayList<>();
@@ -25,12 +25,20 @@ public class CalculatorModel implements Subject {
         setNumber((getNumber() * 10) + digit);
     }
 
-    public double getCalculationValue () {
-        return calculationValue;
-    }
-
-    public void setCalculationValue (int calculationValue) {
-        this.calculationValue = calculationValue;
+    public Double makeOperation () {
+        switch (this.currentTypeOfOperation) {
+            case "+":
+                break;
+            case "-":
+                break;
+            case "x":
+                break;
+            case "/":
+                break;
+            case "=":
+                break;
+        }
+        }
     }
 
     public double getNumber () {
